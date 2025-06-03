@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
   <!--container-->
@@ -43,7 +45,19 @@
         </div>
         <div class="input-box">
           <label for="email">Amount: </label>
-          <input type="text" name="Amount" id="Amount" placeholder="15.00" value="" required />
+          <!-- <input type="text" name="Amount" id="Amount" placeholder="15.00" value="" required /> -->
+           <select name="" id="" class="amount-selection">
+              <option value="" disabled selected>Select Amount</option>
+              <option value="5,000.00">₱ 5,000.00</option>
+              <option value="15,000.00">₱ 15,000.00</option>
+              <option value="50,000.00">₱ 50,000.00</option>
+              <option value="100,000.00">₱ 100,000.00</option>
+              <option value="300,000.00">₱ 300,000.00</option>
+              <option value="500,000.00">₱ 500,000.00</option>
+              <option value="100,000,000.00">₱ 100,000,000.00</option>
+              <option value="200,000,000.00">₱ 200,000,000.00</option>
+           </select>
+           <input type="hidden" name="Amount">
         </div>
       </div>
     </div>
@@ -68,6 +82,11 @@
         });
     }
     $(document).ready(function(){
+        $('.amount-selection').select2({
+          placeholder: 'Select Amount',
+          allowClear: true
+        });
+
         $('#Amount').inputmask('decimal', {
           alias: 'currency',
           prefix: '',
@@ -91,13 +110,14 @@
             const merchantKey = "jTsax121ES";
             const merchantCode = form.find('input[name="MerchantCode"]').val();
             const refNo = form.find('input[name="RefNo"]').val();
-            const amount = form.find('input[name="Amount"]').val();
+            const amount = form.find('select.amount-selection').val();
             const currency = form.find('input[name="Currency"]').val();
-
+    
             generateIpay88Signature(merchantKey, merchantCode, refNo, amount, currency)
             .then(signature => {
                 console.log("Signature:", signature);
                 form.find('input[name="Signature"]').val(signature);
+                form.find('input[name="Amount"]').val(amount);
                 console.log('Form submitted', form, amount);
                 document.getElementById('payment-form').submit();
             });

@@ -132,6 +132,18 @@ label {
   text-align: left !important;
 }
 
+.amount-selection{
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: var(--button-color);
+  color: var(--light-color);
+  margin-top: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-transform: capitalize;
+}
+
 @media only screen and (min-width: 768px) {
   .container #payment-form .row {
     flex-direction: row;
