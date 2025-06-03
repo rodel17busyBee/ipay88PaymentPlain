@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+</head>
+<body>
+  <!--container-->
+<div class="container">
+  <!--payment form-->
+  <form action="https://sandbox.ipay88.com.ph/epayment/entry.asp" id="payment-form" method="post">
+    <div class="row">
+      <!--address info-->
+      <img alt="iPay88 Logo" class="wistia-logo" style="height: 20rem" src="./nexus_core_logo-removebg-preview.png">
+      <div class="col">
+        <h3 class="title">Payment Details</h3>
+        <input type="hidden" name="MerchantCode" value="PH01710">
+        <input type="hidden" name="PaymentId" value="1">
+        <input type="hidden" name="Currency" value="PHP">
+        <input type="hidden" name="ProdDesc" value="Product Description">
+        <input type="hidden" name="Signature">
+        <input type="hidden" name="ResponseURL" value="">
+        <input type="hidden" name="BackendURL" value="">
+        <div class="input-box">
+          <label for="fullname">Full Name: </label>
+          <input type="text" name="UserName" id="UserName" placeholder="John Doe" value="" required />
+        </div>
+        <div class="input-box">
+          <label for="email">Email: </label>
+          <input type="email" name="UserEmail" id="UserEmail" placeholder="example@email.com" value="" required />
+        </div>
+        <div class="input-box">
+          <label for="email">Contact Number: </label>
+          <input type="text" name="UserContact" id="UserContact" placeholder="0987654321" value="" required />
+        </div>
+        <div class="input-box">
+          <label for="email">Reference Number: </label>
+          <input type="text" name="RefNo" id="RefNo" placeholder="RN0000001" value="" required />
+        </div>
+        <div class="input-box">
+          <label for="email">Amount: </label>
+          <input type="text" name="Amount" id="Amount" placeholder="15.00" value="" required />
+        </div>
+      </div>
+    </div>
+    <button id="submit-button" type="submit">proceed with Payment</button>
+  </form>
+</div>
+</body>
+<script>
+    function generateIpay88Signature(merchantKey, merchantCode, refNo, amount, currency) {
+        let hashAmount = amount.replace(/[^\w\s]/gi, '');
+        const inputString = merchantKey + merchantCode + refNo + hashAmount + currency;
+        console.log(merchantKey, merchantCode, refNo, hashAmount, currency);
+        // SHA-1 hash to binary → then base64 encode
+        const encoder = new TextEncoder();
+        const data = encoder.encode(inputString);
+
+        return crypto.subtle.digest("SHA-1", data).then((hashBuffer) => {
+            const byteArray = new Uint8Array(hashBuffer);
+            let binary = "";
+            byteArray.forEach((b) => binary += String.fromCharCode(b));
+            return btoa(binary); // base64 encode
+        });
+    }
+    $(document).ready(function(){
+        $('#Amount').inputmask('decimal', {
+          alias: 'currency',
+          prefix: '',
+          groupSeparator: ',',
+          autoGroup: true,
+          digits: 2,
+          digitsOptional: false,
+          placeholder: '0',
+          removeMaskOnSubmit: true  // optional: gets raw value on submit
+        });
+
+        $('#UserContact').inputmask('0999-999-9999', {
+          placeholder: '0',
+          clearIncomplete: true,
+        });
+
+        $("#payment-form").submit(function(event){
+            event.preventDefault();
+
+            const form = $(this);
+            const merchantKey = "jTsax121ES";
+            const merchantCode = form.find('input[name="MerchantCode"]').val();
+            const refNo = form.find('input[name="RefNo"]').val();
+            const amount = form.find('input[name="Amount"]').val();
+            const currency = form.find('input[name="Currency"]').val();
+
+            generateIpay88Signature(merchantKey, merchantCode, refNo, amount, currency)
+            .then(signature => {
+                console.log("Signature:", signature);
+                form.find('input[name="Signature"]').val(signature);
+                console.log('Form submitted', form, amount);
+                document.getElementById('payment-form').submit();
+            });
+
+        });
+    });
+</script>
+</html>
