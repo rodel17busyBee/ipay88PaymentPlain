@@ -14,13 +14,13 @@
   <!--container-->
 <div class="container">
   <!--payment form-->
-  <form action="https://sandbox.ipay88.com.ph/epayment/entry.asp" id="payment-form" method="post">
+  <form action="https://payment.ipay88.com.ph/epayment/entry.asp" id="payment-form" method="post">
     <div class="row">
       <!--address info-->
       <img alt="iPay88 Logo" class="wistia-logo" style="height: 20rem" src="./nexus_core_logo-removebg-preview.png">
       <div class="col">
         <h3 class="title">Payment Details</h3>
-        <input type="hidden" name="MerchantCode" value="PH01710">
+        <input type="hidden" name="MerchantCode" value="PH06162">
         <input type="hidden" name="PaymentId" value="1">
         <input type="hidden" name="Currency" value="PHP">
         <input type="hidden" name="ProdDesc" value="Product Description">
@@ -107,7 +107,7 @@
             event.preventDefault();
 
             const form = $(this);
-            const merchantKey = "jTsax121ES";
+            const merchantKey = "12jSFRIegh";
             const merchantCode = form.find('input[name="MerchantCode"]').val();
             const refNo = form.find('input[name="RefNo"]').val();
             const amount = form.find('select.amount-selection').val();
