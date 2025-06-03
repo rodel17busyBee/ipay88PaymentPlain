@@ -1,0 +1,146 @@
+.wrapper {
+    background-color: #ECEEF1;
+    width: 100%;
+    }
+
+    .head-wrap {
+    margin: 0 auto;
+    }
+
+    .header.container.logo {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    color: #6f6f6f;
+    display: block;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+    }
+
+    .content.logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 650px;
+    -webkit-font-smoothing: antialiased;
+    padding: 1px;
+    }
+
+    .body-wrap {
+    margin: 0 auto;
+    margin-bottom: 80px;
+    }
+
+    .container.transaction-mailer {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    color: #6f6f6f;
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #CED3D8;
+    background-color: #ffffff;
+    }
+
+    .content {
+    display: block;
+    margin: 0 auto;
+    max-width: 650px;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    }
+
+    .receipt .title {
+      margin: 0;
+      padding: 0;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 130%;
+      color: #ccc;
+      font-size: 26px;
+      text-align: left;
+    }
+
+    .account-item {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .account-item .light {
+      padding-right: 5px;
+      color: #ccc;
+    }
+
+    .account-item .item-detail {
+      padding-right: 5px;
+      color: #434343;
+    }
+
+    .divider {
+      margin-top: 30px;
+      padding-top: 10px;
+      border-top: 1px solid #CCC;
+    }
+
+    .message .emphasis {
+      margin: 0;
+      padding: 0;
+      margin-bottom: 20px;
+      font-weight: 700;
+      margin-top: 10px;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: left;
+      color: #54acff;
+    }
+
+    .message p,
+    .foot p {
+      color: #434343;
+      text-align: left;
+      line-height: 150%;
+      padding: 0;
+      font-weight: 400;
+      font-size: 18px;
+    }
+
+    .message a,
+    .foot a {
+      color: #5490ff;
+    }
+
+    .billing .section-label {
+      color: black;
+      display: inline-block;
+      font-size: 18px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+
+    .billing .total {
+      margin-top: 5px;
+      color: black;
+      display: inline-block;
+      margin-bottom: 5px;
+      font-size: 18px;
+      float: right;
+    }
+
+    .billing ul {
+      width: 80%;
+      text-align: left;
+      list-style-type: none;
+      font-size: 18px;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .billing li {
+      padding-bottom: 5px;
+      font-size: 18px;
+      color: #434343;
+      line-height: 150%;
+    }
+
+    .wistia-logo{
+        object-fit: contain;
+        height: 10rem;
+    }

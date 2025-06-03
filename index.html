@@ -14,19 +14,19 @@
   <!--container-->
 <div class="container">
   <!--payment form-->
-  <form action="https://payment.ipay88.com.ph/epayment/entry.asp" id="payment-form" method="post">
+  <form action="https://sandbox.ipay88.com.ph/epayment/entry.asp" id="payment-form" method="post">
     <div class="row">
       <!--address info-->
       <img alt="iPay88 Logo" class="wistia-logo" style="height: 20rem" src="./nexus_core_logo-removebg-preview.png">
       <div class="col">
         <h3 class="title">Payment Details</h3>
-        <input type="hidden" name="MerchantCode" value="PH06162">
+        <input type="hidden" name="MerchantCode" value="PH01710">
         <input type="hidden" name="PaymentId" value="1">
         <input type="hidden" name="Currency" value="PHP">
         <input type="hidden" name="ProdDesc" value="Product Description">
         <input type="hidden" name="Signature">
-        <input type="hidden" name="ResponseURL" value="">
-        <input type="hidden" name="BackendURL" value="">
+        <input type="hidden" name="ResponseURL" value="http://localhost/ipay88-form/front_response.php">
+        <input type="hidden" name="BackendURL" value="http://localhost/ipay88-form/back_response.php">
         <div class="input-box">
           <label for="fullname">Full Name: </label>
           <input type="text" name="UserName" id="UserName" placeholder="John Doe" value="" required />
@@ -107,7 +107,7 @@
             event.preventDefault();
 
             const form = $(this);
-            const merchantKey = "12jSFRIegh";
+            const merchantKey = "jTsax121ES";
             const merchantCode = form.find('input[name="MerchantCode"]').val();
             const refNo = form.find('input[name="RefNo"]').val();
             const amount = form.find('select.amount-selection').val();
@@ -115,10 +115,8 @@
     
             generateIpay88Signature(merchantKey, merchantCode, refNo, amount, currency)
             .then(signature => {
-                console.log("Signature:", signature);
                 form.find('input[name="Signature"]').val(signature);
                 form.find('input[name="Amount"]').val(amount);
-                console.log('Form submitted', form, amount);
                 document.getElementById('payment-form').submit();
             });
 
